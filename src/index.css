@@ -1,11 +1,11 @@
 /* ========Google fonts===========*/
-@import url('https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,900;1,300;1,400;1,500;1,600;1,700;1,900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,900;1,300;1,400;1,500;1,600;1,700;1,900&display=swap");
 /* ========base style  fonts===========*/
-*{
-  margin : 0;
+* {
+  margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Source Sans 3', sans-serif;
+  font-family: "Source Sans 3", sans-serif;
 }
 
 /* =======pre define CSS  ==========*/
@@ -92,4 +92,26 @@ section {
   .section__subtitle {
     font-size: 1.1rem;
   }
+}
+
+.wrapper-svg svg {
+  position: relative;
+  left: 0px;
+  top: 30px;
+}
+
+.svg-container {
+  position: absolute;
+}
+
+.chair {
+  stroke: #b8860b;
+  stroke-width: 4;
+  fill: red;
+}
+
+.rectangle {
+  stroke: blue;
+  fill: rgb(96, 96, 193);
+  border-radius: 1px;
 }
