@@ -8,6 +8,7 @@ const Bookdesk = () => {
     emp_id: "M26398",
   });
 
+  const [arrival, setArrival] = useState(false);
   useEffect(() => {
     async function getData() {
       const res = await fetch("http://localhost:8080/demo", {
@@ -15,9 +16,19 @@ const Bookdesk = () => {
       });
       const docs = await res.json();
       setData(docs);
+      setArrival(true);
     }
 
     getData();
+  }, []);
+
+  useEffect(() => {
+    console.log(data);
+
+    data.forEach(function (doc) {
+      document.querySelector(`[data-id='${doc.chair_id}']`).style.fill =
+        "green";
+    });
 
     const element = ref.current;
 
@@ -35,40 +46,37 @@ const Bookdesk = () => {
 
     const loggedIn = { name: loginData.name, emp_id: loginData.emp_id };
 
-    element.addEventListener("click", function (e) {
-      console.log(e);
-      if (e.target.classList.contains("chair")) {
-        if (
-          data.find(function (entry) {
-            return entry.emp_id === loggedIn.emp_id;
-          })
-        ) {
-          alert(
-            "Sorry you can only book one seat on single day! You can delete today's entry and select another chair!"
-          );
-        } else {
-          e.target.style.fill = "green";
-          loggedIn["chair_id"] = e.target.dataset.id;
-          loggedIn["date_created"] = new Date();
-          loggedIn["for_date"] = new Date(loggedIn["date_created"]);
-          loggedIn["for_date"].setDate(loggedIn["date_created"].getDate() + 1);
-          loggedIn["for_date"].setHours(0, 0, 0, 0);
-          data.push(loggedIn);
+    if (arrival) {
+      element.addEventListener("click", function (e) {
+        console.log(e);
+        console.log(data);
+        if (e.target.classList.contains("chair")) {
+          if (
+            data.find(function (entry) {
+              console.log(entry.emp_id);
+              return entry.emp_id === loggedIn.emp_id;
+            })
+          ) {
+            alert(
+              "Sorry you can only book one seat on single day! You can delete today's entry and select another chair!"
+            );
+          } else {
+            e.target.style.fill = "green";
+            loggedIn["chair_id"] = e.target.dataset.id;
+            loggedIn["date_created"] = new Date();
+            loggedIn["for_date"] = new Date(loggedIn["date_created"]);
+            loggedIn["for_date"].setDate(
+              loggedIn["date_created"].getDate() + 1
+            );
+            loggedIn["for_date"].setHours(0, 0, 0, 0);
+            data.push(loggedIn);
 
-          putData(loggedIn);
+            putData(loggedIn);
+          }
         }
-      }
-    });
-  }, []);
-
-  useEffect(() => {
-    console.log(data);
-
-    data.forEach(function (doc) {
-      document.querySelector(`[data-id='${doc.chair_id}']`).style.fill =
-        "green";
-    });
-  }, [data]);
+      });
+    }
+  }, [arrival]);
 
   return (
     <div class="wrapper-svg">
