@@ -1,6 +1,9 @@
 import { useState, useRef } from "react";
-import { Link } from "react-router-dom";
-const Login = ({ setToken }) => {
+import { Link, useNavigate } from "react-router-dom";
+
+const Register = ({ setToken }) => {
+  const navigate = useNavigate();
+  const nameRef = useRef(null);
   const idRef = useRef(null);
   const passRef = useRef(null);
   const [form, setForm] = useState({});
@@ -15,7 +18,7 @@ const Login = ({ setToken }) => {
   const handleSubmit = async function (e) {
     e.preventDefault();
     console.log(form);
-    const res = await fetch("http://localhost:8080/login", {
+    const res = await fetch("http://localhost:8080/register", {
       method: "POST",
       body: JSON.stringify(form),
       headers: {
@@ -25,17 +28,31 @@ const Login = ({ setToken }) => {
     const answer = await res.json();
     console.log(answer);
     e.target.reset();
-    if (answer["return"].localeCompare("OK") === 0) {
+    if (
+      answer["return"].localeCompare(
+        "User saved. Logging In Automatically!"
+      ) === 0
+    ) {
       localStorage.setItem("token", JSON.stringify(answer));
       setToken(answer);
+      navigate("/");
     } else {
-      setMessage(answer["return"]);
+      setMessage(answer.return);
     }
   };
 
   return (
     <>
       <form onSubmit={handleSubmit}>
+        <label>
+          Full Name:
+          <input
+            type="text"
+            name="name"
+            onChange={handleChange}
+            ref={nameRef}
+          ></input>
+        </label>
         <label>
           Username:
           <input
@@ -56,10 +73,10 @@ const Login = ({ setToken }) => {
         </label>
         <input type="submit" value="Submit" />
       </form>
-      <Link to="/register">Register here</Link>
+      <Link to="/login">Login here</Link>
       <div>{message ? message : ""}</div>
     </>
   );
 };
 
-export default Login;
+export default Register;
