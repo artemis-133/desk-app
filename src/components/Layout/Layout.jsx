@@ -3,13 +3,19 @@ import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
 import Routers from "../../routers/Routers";
 // import App from '../../App'
-const Layout = () => {
+const Layout = ({ token, saveToken }) => {
   return (
     <Fragment>
-      <Header />
-      <div>
-        <Routers />
-      </div>
+      <Header token={token} />
+      {token["emp_id"] ? (
+        <div>
+          <Routers />
+        </div>
+      ) : (
+        <div>
+          <LoginInRouters saveToken={saveToken} />
+        </div>
+      )}
       <Footer />
     </Fragment>
   );

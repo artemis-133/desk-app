@@ -16,25 +16,7 @@ function App() {
 
   const [token, setToken] = useState(getToken());
 
-  if (!token) {
-    return (
-      <Routes>
-        <Route
-          exact
-          path="/register"
-          element={<Register setToken={setToken} />}
-        />
-        <Route exact path="/login" element={<Login setToken={setToken} />} />
-        <Route
-          exact
-          path="/"
-          element={<Navigate replace={true} to="/login" />}
-        />
-      </Routes>
-    );
-  }
-
-  return <Layout></Layout>;
+  return <Layout token={token} saveToken={setToken} />;
 }
 
 export default App;

@@ -1,8 +1,8 @@
-import React from 'react'
+import React from "react";
 
-import { Container, Row, Col } from 'reactstrap'
+import { Container, Row, Col } from "reactstrap";
 import { Link, NavLink } from "react-router-dom";
-import '../../styles/header.css'
+import "../../styles/header.css";
 
 const navLinks = [
   {
@@ -24,9 +24,9 @@ const navLinks = [
   },
 ];
 
-
-const Header = () => {
-  return < header className='header'>
+const Header = ({ token }) => {
+  return (
+    <header className="header">
       {/* ============ header top ============ */}
       <div className="header__top">
         <Container>
@@ -111,44 +111,48 @@ const Header = () => {
           </Row>
         </Container>
       </div>
-      
+
       {/* ========== main navigation =========== */}
+      {token["emp_id"] ? (
+        <div className="main__navbar">
+          <Container>
+            <div className="navigation__wrapper d-flex align-items-center justify-content-between">
+              <span className="mobile__menu">
+                <i class="ri-menu-line"></i>
+              </span>
 
-      <div className="main__navbar">
-        <Container>
-          <div className="navigation__wrapper d-flex align-items-center justify-content-between">
-            <span className="mobile__menu">
-              <i class="ri-menu-line"></i>
-            </span>
+              <div className="navigation">
+                <div className="menu">
+                  {navLinks.map((item, index) => (
+                    <NavLink
+                      to={item.path}
+                      className={(navClass) =>
+                        navClass.isActive
+                          ? "nav__active nav__item"
+                          : "nav__item"
+                      }
+                      key={index}
+                    >
+                      {item.display}
+                    </NavLink>
+                  ))}
+                </div>
+              </div>
 
-            <div className="navigation">
-              <div className="menu">
-                {navLinks.map((item, index) => (
-                  <NavLink
-                    to={item.path}
-                    className={(navClass) =>
-                      navClass.isActive ? "nav__active nav__item" : "nav__item"
-                    }
-                    key={index}
-                  >
-                    {item.display}
-                  </NavLink>
-                ))}
+              <div className="nav__right">
+                <div className="search__box">
+                  <input type="text" placeholder="Search" />
+                  <span>
+                    <i class="ri-search-line"></i>
+                  </span>
+                </div>
               </div>
             </div>
+          </Container>
+        </div>
+      ) : null}
+    </header>
+  );
+};
 
-            <div className="nav__right">
-              <div className="search__box">
-                <input type="text" placeholder="Search" />
-                <span>
-                  <i class="ri-search-line"></i>
-                </span>
-              </div>
-            </div>
-          </div>
-        </Container>
-      </div>
- </header>   
-}
-
-export default Header
+export default Header;
