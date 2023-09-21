@@ -11,4 +11,4 @@ const Layout = () => {
   </Fragment>
 }
 
-export default Layout
+export default Layout;
