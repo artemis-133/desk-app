@@ -113,7 +113,7 @@ const Header = ({ token }) => {
       </div>
 
       {/* ========== main navigation =========== */}
-      {token["emp_id"] ? (
+      {token && token["cookie_id"] ? (
         <div className="main__navbar">
           <Container>
             <div className="navigation__wrapper d-flex align-items-center justify-content-between">

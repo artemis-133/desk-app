@@ -1,8 +1,5 @@
 import Layout from "./components/Layout/Layout";
 import { useState } from "react";
-import Login from "./pages/Login";
-import Register from "./pages/Register";
-import { Routes, Route, Navigate } from "react-router-dom";
 // import "./App.css";
 
 function App() {
