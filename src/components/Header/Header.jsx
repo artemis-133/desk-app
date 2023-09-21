@@ -35,19 +35,19 @@ const Header = () => {
               <div className="header__top__left">
                 <span>Need Help?</span>
                 <span className="header__top__help">
-                  <i class="ri-phone-fill"></i> +9596282691
+                  <i class="ri-phone-fill"></i> +919596282691
                 </span>
               </div>
             </Col>
 
             <Col lg="6" md="6" sm="6">
               <div className="header__top__right d-flex align-items-center justify-content-end gap-3">
-                <Link to="#" className=" d-flex align-items-center gap-1">
-                  <i class="ri-login-circle-line"></i> Login
+                <Link to="/Signin" className=" d-flex align-items-center gap-1">
+                  <i class="ri-login-circle-line"></i> Signin
                 </Link>
 
-                <Link to="#" className=" d-flex align-items-center gap-1">
-                  <i class="ri-user-line"></i> Register
+                <Link to="/signup" className=" d-flex align-items-center gap-1">
+                  <i class="ri-user-line"></i> Signup 
                 </Link>
               </div>
             </Col>
@@ -62,7 +62,7 @@ const Header = () => {
             <Col lg="4" md="3" sm="4">
               <div className="logo">
                 <h1>
-                  <Link to="/home" className=" d-flex align-items-center gap-2">
+                  <Link to="/Bookdesk" className=" d-flex align-items-center gap-2">
                     <i class="ri-home-office-line"></i>
                     <span>
                       Book a desk <br /> Service
@@ -96,7 +96,7 @@ const Header = () => {
               </div>
             </Col>
 
-            <Col
+            {/* <Col
               lg="2"
               md="3"
               sm="0"
@@ -107,7 +107,7 @@ const Header = () => {
                   <i class="ri-phone-line"></i> Request a call
                 </Link>
               </button>
-            </Col>
+            </Col> */}
           </Row>
         </Container>
       </div>
@@ -134,15 +134,6 @@ const Header = () => {
                     {item.display}
                   </NavLink>
                 ))}
-              </div>
-            </div>
-
-            <div className="nav__right">
-              <div className="search__box">
-                <input type="text" placeholder="Search" />
-                <span>
-                  <i class="ri-search-line"></i>
-                </span>
               </div>
             </div>
           </div>
