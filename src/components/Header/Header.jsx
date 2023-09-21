@@ -47,7 +47,7 @@ const Header = ({ token }) => {
                 </Link>
 
                 <Link to="/signup" className=" d-flex align-items-center gap-1">
-                  <i class="ri-user-line"></i> Signup 
+                  <i class="ri-user-line"></i> Signup
                 </Link>
               </div>
             </Col>
@@ -62,7 +62,10 @@ const Header = ({ token }) => {
             <Col lg="4" md="3" sm="4">
               <div className="logo">
                 <h1>
-                  <Link to="/Bookdesk" className=" d-flex align-items-center gap-2">
+                  <Link
+                    to="/Bookdesk"
+                    className=" d-flex align-items-center gap-2"
+                  >
                     <i class="ri-home-office-line"></i>
                     <span>
                       Book a desk <br /> Service
@@ -139,7 +142,6 @@ const Header = ({ token }) => {
                 </div>
               </div>
 
-
               <div className="nav__right">
                 <div className="search__box">
                   <input type="text" placeholder="Search" />
@@ -155,6 +157,5 @@ const Header = ({ token }) => {
     </header>
   );
 };
-}
 
 export default Header;

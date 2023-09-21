@@ -2,11 +2,11 @@ import React, { useRef, useEffect, useState } from "react";
 
 const Bookdesk = () => {
   const ref = useRef(null);
-  // const [data, setData] = useState([]);
-  // const [loginData, setLoginData] = useState({
-  //   name: "Manik Garg",
-  //   emp_id: "M26398",
-  // });
+  const [data, setData] = useState([]);
+  const [loginData, setLoginData] = useState({
+    name: "Manik Garg",
+    emp_id: "M26398",
+  });
 
   const [arrival, setArrival] = useState(false);
   useEffect(() => {
@@ -45,7 +45,6 @@ const Bookdesk = () => {
     }
 
     const loggedIn = { name: loginData.name, emp_id: loginData.emp_id };
-
 
     if (arrival) {
       element.addEventListener("click", function (e) {

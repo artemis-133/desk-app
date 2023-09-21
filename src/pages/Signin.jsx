@@ -1,12 +1,12 @@
-import React from 'react';
-import CommonSection from '../components/Commonsection';
-import { Container, Row, Col, Form, FormGroup } from 'reactstrap';
-import Helmet from '../components/Helmet';
-import { Link } from 'react-router-dom';
+import React from "react";
+import CommonSection from "../components/Commonsection";
+import { Container, Row, Col, Form, FormGroup } from "reactstrap";
+import Helmet from "../components/Helmet";
+import { Link } from "react-router-dom";
 
-import '../styles/sign-in.css';
+import "../styles/sign-in.css";
 
-const Signin = () => {
+const Signin = ({ saveToken }) => {
   return (
     <Helmet title="Login">
       <section className="p-0">
