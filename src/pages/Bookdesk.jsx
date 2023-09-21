@@ -2,73 +2,73 @@ import React, { useRef, useEffect, useState } from "react";
 
 const Bookdesk = () => {
   const ref = useRef(null);
-  const [data, setData] = useState([]);
-  const [loginData, setLoginData] = useState({
-    name: "Manik Garg",
-    emp_id: "M26398",
-  });
+  // const [data, setData] = useState([]);
+  // const [loginData, setLoginData] = useState({
+  //   name: "Manik Garg",
+  //   emp_id: "M26398",
+  // });
 
-  useEffect(() => {
-    async function getData() {
-      const res = await fetch("http://localhost:8080/demo", {
-        method: "GET",
-      });
-      const docs = await res.json();
-      setData(docs);
-    }
+  // useEffect(() => {
+  //   async function getData() {
+  //     const res = await fetch("http://localhost:8080/demo", {
+  //       method: "GET",
+  //     });
+  //     const docs = await res.json();
+  //     setData(docs);
+  //   }
 
-    getData();
+  //   getData();
 
-    const element = ref.current;
+  //   const element = ref.current;
 
-    async function putData(data) {
-      const response = await fetch("http://localhost:8080/demo", {
-        method: "POST",
-        body: JSON.stringify(data),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-      const confirm = await response.json();
-      console.log(confirm);
-    }
+  //   async function putData(data) {
+  //     const response = await fetch("http://localhost:8080/demo", {
+  //       method: "POST",
+  //       body: JSON.stringify(data),
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //     });
+  //     const confirm = await response.json();
+  //     console.log(confirm);
+  //   }
 
-    const loggedIn = { name: loginData.name, emp_id: loginData.emp_id };
+  //   const loggedIn = { name: loginData.name, emp_id: loginData.emp_id };
 
-    element.addEventListener("click", function (e) {
-      console.log(e);
-      if (e.target.classList.contains("chair")) {
-        if (
-          data.find(function (entry) {
-            return entry.emp_id === loggedIn.emp_id;
-          })
-        ) {
-          alert(
-            "Sorry you can only book one seat on single day! You can delete today's entry and select another chair!"
-          );
-        } else {
-          e.target.style.fill = "green";
-          loggedIn["chair_id"] = e.target.dataset.id;
-          loggedIn["date_created"] = new Date();
-          loggedIn["for_date"] = new Date(loggedIn["date_created"]);
-          loggedIn["for_date"].setDate(loggedIn["date_created"].getDate() + 1);
-          loggedIn["for_date"].setHours(0, 0, 0, 0);
-          data.push(loggedIn);
+  //   element.addEventListener("click", function (e) {
+  //     console.log(e);
+  //     if (e.target.classList.contains("chair")) {
+  //       if (
+  //         data.find(function (entry) {
+  //           return entry.emp_id === loggedIn.emp_id;
+  //         })
+  //       ) {
+  //         alert(
+  //           "Sorry you can only book one seat on single day! You can delete today's entry and select another chair!"
+  //         );
+  //       } else {
+  //         e.target.style.fill = "green";
+  //         loggedIn["chair_id"] = e.target.dataset.id;
+  //         loggedIn["date_created"] = new Date();
+  //         loggedIn["for_date"] = new Date(loggedIn["date_created"]);
+  //         loggedIn["for_date"].setDate(loggedIn["date_created"].getDate() + 1);
+  //         loggedIn["for_date"].setHours(0, 0, 0, 0);
+  //         data.push(loggedIn);
 
-          putData(loggedIn);
-        }
-      }
-    });
-  }, []);
+  //         putData(loggedIn);
+  //       }
+  //     }
+  //   });
+  // }, []);
 
-  useEffect(() => {
-    console.log(data);
+  // useEffect(() => {
+  //   console.log(data);
 
-    data.forEach(function (doc) {
-      document.querySelector(`[data-id='${doc.chair_id}']`).style.fill =
-        "green";
-    });
-  }, [data]);
+  //   data.forEach(function (doc) {
+  //     document.querySelector(`[data-id='${doc.chair_id}']`).style.fill =
+  //       "green";
+  //   });
+  // }, [data]);
 
   return (
     <div class="wrapper-svg">
