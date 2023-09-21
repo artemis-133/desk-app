@@ -12,7 +12,7 @@ const LoginInRouters = (saveToken) => {
       <Route exact path="/signin" element={<Signin setToken={saveToken} />} />
       <Route
         exact
-        path="/"
+        path="/*"
         element={<Navigate replace={true} to="/signin" />}
       />
     </Routes>

@@ -40,17 +40,25 @@ const Header = ({ token }) => {
               </div>
             </Col>
 
-            <Col lg="6" md="6" sm="6">
-              <div className="header__top__right d-flex align-items-center justify-content-end gap-3">
-                <Link to="/Signin" className=" d-flex align-items-center gap-1">
-                  <i class="ri-login-circle-line"></i> Signin
-                </Link>
+            {!token ? (
+              <Col lg="6" md="6" sm="6">
+                <div className="header__top__right d-flex align-items-center justify-content-end gap-3">
+                  <Link
+                    to="/Signin"
+                    className=" d-flex align-items-center gap-1"
+                  >
+                    <i class="ri-login-circle-line"></i> Signin
+                  </Link>
 
-                <Link to="/signup" className=" d-flex align-items-center gap-1">
-                  <i class="ri-user-line"></i> Signup
-                </Link>
-              </div>
-            </Col>
+                  <Link
+                    to="/signup"
+                    className=" d-flex align-items-center gap-1"
+                  >
+                    <i class="ri-user-line"></i> Signup
+                  </Link>
+                </div>
+              </Col>
+            ) : null}
           </Row>
         </Container>
       </div>
