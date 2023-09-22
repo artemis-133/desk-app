@@ -1,5 +1,10 @@
-body {
-    background-color: #508bfc;
+.auth_form{
+    padding: 30px;
+    display: inline-block;
+    background: #FFFFFF;
+    margin-top: 10%;
+    border-radius: 22px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)
   }
 
 .login__form input {
