@@ -49,8 +49,8 @@ const Signin = ({ setToken }) => {
       <section>
         <Container>
           <Row>
-            <Col lg="3" md="6" sm="8" xs="10" className="m-auto text-center">
-              <Form className="auth_form" onSubmit={handleSubmit}>
+            <Col className="m-auto text-center">
+              <Form className="auth_form " onSubmit={handleSubmit}>
                 <h4 className=" d-flex align-items-center gap-2 justify-content-center mb-5">
                   <i class="ri-key-2-line"></i> Sign In
                 </h4>
