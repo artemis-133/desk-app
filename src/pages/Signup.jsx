@@ -117,6 +117,7 @@ const Signup = ({ setToken }) => {
                     onChange={handleChange}
                   />
                 </FormGroup>
+
                 <FormGroup className="login__form d-flex align-items-center gap-4 mb-4">
                   <span>
                     <i class="ri-lock-2-line"></i>
