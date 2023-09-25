@@ -72,11 +72,11 @@ const Signup = ({ setToken }) => {
       <section>
         <Container>
           <Row>
-            <Col lg="3" md="6" sm="8" xs="10" className="m-auto">
-              <h4 className=" d-flex align-items-center gap-2 justify-content-center mb-5">
-                <i class="ri-user-add-line"></i> Sign Up
-              </h4>
-              <Form onSubmit={handleSubmit}>
+            <Col lg="3" md="6" sm="8" xs="10" className="m-auto text-center">
+              <Form className="auth_form" onSubmit={handleSubmit}>
+                <h4 className=" d-flex align-items-center gap-2 justify-content-center mb-5">
+                  <i class="ri-user-add-line"></i> Sign Up
+                </h4>
                 <FormGroup className="login__form d-flex align-items-center gap-4 mb-4">
                   <span>
                     <i class="ri-user-line"></i>
