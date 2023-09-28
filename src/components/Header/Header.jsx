@@ -1,8 +1,16 @@
 import React from "react";
-
+import "bootstrap/dist/css/bootstrap.min.css";
 import { Container, Row, Col } from "reactstrap";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import "../../styles/header.css";
+import {
+  DropdownMenu,
+  DropdownItem,
+  ButtonDropdown,
+  DropdownToggle,
+} from "reactstrap";
+import "./myStyles.css";
+import LogoutLogo from "../../assets/logout-svgrepo-com.svg";
 
 const navLinks = [
   {
@@ -24,7 +32,16 @@ const navLinks = [
   },
 ];
 
-const Header = ({ token }) => {
+const Header = ({ token, setToken }) => {
+  const navigate = useNavigate();
+  const [dropdownOpen, setOpen] = React.useState(false);
+  const handleLogout = function (e) {
+    localStorage.removeItem("token");
+    setOpen(false);
+    setToken(null);
+    navigate("/");
+  };
+
   return (
     <header className="header">
       {/* ============ header top ============ */}
@@ -58,7 +75,44 @@ const Header = ({ token }) => {
                   </Link>
                 </div>
               </Col>
-            ) : null}
+            ) : (
+              <Col lg="6" md="6" sm="6">
+                <div className="header__top__right d-flex align-items-center justify-content-end gap-3">
+                  <ButtonDropdown
+                    toggle={() => {
+                      setOpen(!dropdownOpen);
+                    }}
+                    isOpen={dropdownOpen}
+                  >
+                    <DropdownToggle className="bg-primary" caret>
+                      Profile
+                    </DropdownToggle>
+                    <DropdownMenu>
+                      <DropdownItem header>
+                        <div className="myClass">
+                          <div class="abbrCircle">MG</div>
+                          <h4>M26398</h4>
+                          <h6>manik.garg@hdfcbank.com</h6>
+                        </div>
+                      </DropdownItem>
+                      <DropdownItem className="myDropItems">Home</DropdownItem>
+                      {/* <DropdownDivider /> */}
+                      <DropdownItem className="myDropItems">
+                        History
+                      </DropdownItem>
+                      <div className="myDiv" onClick={handleLogout}>
+                        <img
+                          className="myLogoutButton"
+                          src={LogoutLogo}
+                          alt="Logout"
+                        />
+                      </div>
+                      {/* </DropdownItem> */}
+                    </DropdownMenu>
+                  </ButtonDropdown>
+                </div>
+              </Col>
+            )}
           </Row>
         </Container>
       </div>

@@ -9,7 +9,7 @@ const Layout = ({ token, saveToken }) => {
   }, []);
   return (
     <Fragment>
-      <Header token={token} />
+      <Header token={token} setToken={saveToken} />
       {token && token["cookie_id"] ? (
         <div>
           <Routers />
