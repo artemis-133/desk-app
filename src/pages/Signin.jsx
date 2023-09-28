@@ -42,6 +42,7 @@ const Signin = ({ setToken }) => {
   };
 
   return (
+    <div class="signin-container">
     <Helmet title="Login">
       <section className="p-0">
         <CommonSection title="Login Page" />
@@ -96,6 +97,7 @@ const Signin = ({ setToken }) => {
         </Container>
       </section>
     </Helmet>
+    </div> 
   );
 };
 

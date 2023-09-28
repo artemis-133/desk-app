@@ -4,6 +4,8 @@ import { Link, useNavigate } from "react-router-dom";
 import Helmet from "../components/Helmet";
 import CommonSection from "../components/Commonsection";
 
+import "../styles/sign-in.css";
+
 const Signup = ({ setToken }) => {
   const navigate = useNavigate();
   const usernameRef = useRef(null);
@@ -65,6 +67,7 @@ const Signup = ({ setToken }) => {
   };
 
   return (
+    <div class="signin-container">
     <Helmet title="Sign Up">
       <section className="p-0">
         <CommonSection title="Sign Up Page" />
@@ -158,6 +161,7 @@ const Signup = ({ setToken }) => {
         </Container>
       </section>
     </Helmet>
+    </div>
   );
 };
 
