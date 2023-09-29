@@ -1,6 +1,7 @@
 /* ========Google fonts===========*/
 @import url("https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,900;1,300;1,400;1,500;1,600;1,700;1,900&display=swap");
 /* ========base style  fonts===========*/
+
 * {
   margin: 0;
   padding: 0;
@@ -38,7 +39,11 @@ a {
 a:hover {
   color: unset;
 }
-
+.back-grad {
+  background: linear-gradient(180deg, #ffffff, #b58ded);
+  /* min-height: 100%; */
+  /* width: 100%; */
+}
 ul {
   margin: 0;
   list-style: none;

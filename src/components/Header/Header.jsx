@@ -1,8 +1,15 @@
-import React from "react";
-
+import React, { useState, useEffect } from "react";
+import "bootstrap/dist/css/bootstrap.min.css";
 import { Container, Row, Col } from "reactstrap";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import "../../styles/header.css";
+import {
+  DropdownMenu,
+  DropdownItem,
+  ButtonDropdown,
+  DropdownToggle,
+} from "reactstrap";
+import LogoutLogo from "../../assets/logout-svgrepo-com.svg";
 
 const navLinks = [
   {
@@ -24,7 +31,29 @@ const navLinks = [
   },
 ];
 
-const Header = ({ token }) => {
+const Header = ({ token, setToken }) => {
+  const navigate = useNavigate();
+  const [dropdownOpen, setOpen] = React.useState(false);
+  const [nameAbbr, setNameAbbr] = useState("");
+
+  useEffect(() => {
+    if (token && token["user"]) {
+      let nameSplit = token["user"].split(".");
+      let initials = nameSplit.reduce((acc, i) => acc + i.toUpperCase()[0], "");
+      if (initials.length > 2) {
+        initials = initials.slice(0, 2);
+      }
+      setNameAbbr(initials);
+    }
+  }, [token]);
+
+  const handleLogout = function (e) {
+    localStorage.removeItem("token");
+    setOpen(false);
+    setToken(null);
+    navigate("/");
+  };
+
   return (
     <header className="header">
       {/* ============ header top ============ */}
@@ -58,7 +87,44 @@ const Header = ({ token }) => {
                   </Link>
                 </div>
               </Col>
-            ) : null}
+            ) : (
+              <Col lg="6" md="6" sm="6">
+                <div className="header__top__right d-flex align-items-center justify-content-end gap-3">
+                  <ButtonDropdown
+                    toggle={() => {
+                      setOpen(!dropdownOpen);
+                    }}
+                    isOpen={dropdownOpen}
+                  >
+                    <DropdownToggle className="dropdown-button" caret>
+                      Profile
+                    </DropdownToggle>
+                    <DropdownMenu className="drop_container">
+                      <DropdownItem header>
+                        <div className="myClass">
+                          <div class="abbrCircle">{nameAbbr}</div>
+                          <h4>{token.user}</h4>
+                          <h6>{token.email}</h6>
+                        </div>
+                      </DropdownItem>
+                      <DropdownItem className="myDropItems">Home</DropdownItem>
+                      {/* <DropdownDivider /> */}
+                      <DropdownItem className="myDropItems">
+                        History
+                      </DropdownItem>
+                      <div className="myDiv" onClick={handleLogout}>
+                        <img
+                          className="myLogoutButton"
+                          src={LogoutLogo}
+                          alt="Logout"
+                        />
+                      </div>
+                      {/* </DropdownItem> */}
+                    </DropdownMenu>
+                  </ButtonDropdown>
+                </div>
+              </Col>
+            )}
           </Row>
         </Container>
       </div>
@@ -124,7 +190,7 @@ const Header = ({ token }) => {
       </div>
 
       {/* ========== main navigation =========== */}
-      {token && token["cookie_id"] ? (
+      {token && token["user"] ? (
         <div className="main__navbar">
           <Container>
             <div className="navigation__wrapper d-flex align-items-center justify-content-between">
@@ -150,14 +216,14 @@ const Header = ({ token }) => {
                 </div>
               </div>
 
-              <div className="nav__right">
+              {/* <div className="nav__right">
                 <div className="search__box">
                   <input type="text" placeholder="Search" />
                   <span>
                     <i class="ri-search-line"></i>
                   </span>
                 </div>
-              </div>
+              </div> */}
             </div>
           </Container>
         </div>
