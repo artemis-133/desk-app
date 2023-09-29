@@ -9,7 +9,6 @@ import {
   ButtonDropdown,
   DropdownToggle,
 } from "reactstrap";
-import "./myStyles.css";
 import LogoutLogo from "../../assets/logout-svgrepo-com.svg";
 
 const navLinks = [
@@ -84,10 +83,10 @@ const Header = ({ token, setToken }) => {
                     }}
                     isOpen={dropdownOpen}
                   >
-                    <DropdownToggle className="bg-primary" caret>
+                    <DropdownToggle className="dropdown-button" caret>
                       Profile
                     </DropdownToggle>
-                    <DropdownMenu>
+                    <DropdownMenu className= "drop_container">
                       <DropdownItem header>
                         <div className="myClass">
                           <div class="abbrCircle">MG</div>
