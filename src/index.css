@@ -39,7 +39,11 @@ a {
 a:hover {
   color: unset;
 }
-
+.back-grad {
+  background: linear-gradient(180deg, #ffffff, #b58ded);
+  /* min-height: 100%; */
+  /* width: 100%; */
+}
 ul {
   margin: 0;
   list-style: none;

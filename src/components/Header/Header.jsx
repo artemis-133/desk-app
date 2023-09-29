@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Container, Row, Col } from "reactstrap";
 import { Link, NavLink, useNavigate } from "react-router-dom";
@@ -34,6 +34,19 @@ const navLinks = [
 const Header = ({ token, setToken }) => {
   const navigate = useNavigate();
   const [dropdownOpen, setOpen] = React.useState(false);
+  const [nameAbbr, setNameAbbr] = useState("");
+
+  useEffect(() => {
+    if (token && token["user"]) {
+      let nameSplit = token["user"].split(".");
+      let initials = nameSplit.reduce((acc, i) => acc + i.toUpperCase()[0], "");
+      if (initials.length > 2) {
+        initials = initials.slice(0, 2);
+      }
+      setNameAbbr(initials);
+    }
+  }, [token]);
+
   const handleLogout = function (e) {
     localStorage.removeItem("token");
     setOpen(false);
@@ -86,12 +99,12 @@ const Header = ({ token, setToken }) => {
                     <DropdownToggle className="dropdown-button" caret>
                       Profile
                     </DropdownToggle>
-                    <DropdownMenu className= "drop_container">
+                    <DropdownMenu className="drop_container">
                       <DropdownItem header>
                         <div className="myClass">
-                          <div class="abbrCircle">MG</div>
-                          <h4>M26398</h4>
-                          <h6>manik.garg@hdfcbank.com</h6>
+                          <div class="abbrCircle">{nameAbbr}</div>
+                          <h4>{token.user}</h4>
+                          <h6>{token.email}</h6>
                         </div>
                       </DropdownItem>
                       <DropdownItem className="myDropItems">Home</DropdownItem>
@@ -177,7 +190,7 @@ const Header = ({ token, setToken }) => {
       </div>
 
       {/* ========== main navigation =========== */}
-      {token && token["cookie_id"] ? (
+      {token && token["user"] ? (
         <div className="main__navbar">
           <Container>
             <div className="navigation__wrapper d-flex align-items-center justify-content-between">
@@ -203,14 +216,14 @@ const Header = ({ token, setToken }) => {
                 </div>
               </div>
 
-              <div className="nav__right">
+              {/* <div className="nav__right">
                 <div className="search__box">
                   <input type="text" placeholder="Search" />
                   <span>
                     <i class="ri-search-line"></i>
                   </span>
                 </div>
-              </div>
+              </div> */}
             </div>
           </Container>
         </div>

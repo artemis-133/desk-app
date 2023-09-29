@@ -10,7 +10,7 @@ const Layout = ({ token, saveToken }) => {
   return (
     <Fragment>
       <Header token={token} setToken={saveToken} />
-      {token && token["cookie_id"] ? (
+      {token && token["user"] ? (
         <div>
           <Routers />
         </div>
