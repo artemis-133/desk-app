@@ -1,22 +1,22 @@
 import React, { useRef, useEffect, useState } from "react";
 
-const Bookdesk = () => {
+const Bookdesk = ({ token }) => {
   const ref = useRef(null);
   const [data, setData] = useState([]);
-  const [loginData, setLoginData] = useState({
-    name: "Manik Garg",
-    emp_id: "M26398",
-  });
 
   const [arrival, setArrival] = useState(false);
   useEffect(() => {
     async function getData() {
-      const res = await fetch("http://localhost:8080/demo", {
-        method: "GET",
-      });
-      const docs = await res.json();
-      setData(docs);
-      setArrival(true);
+      try {
+        const res = await fetch("http://localhost:8080/demo", {
+          method: "GET",
+        });
+        const docs = await res.json();
+        setData(docs);
+        setArrival(true);
+      } catch (error) {
+        alert("Server not responding!");
+      }
     }
 
     getData();
@@ -33,18 +33,23 @@ const Bookdesk = () => {
     const element = ref.current;
 
     async function putData(data) {
-      const response = await fetch("http://localhost:8080/demo", {
-        method: "POST",
-        body: JSON.stringify(data),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-      const confirm = await response.json();
-      console.log(confirm);
+      try {
+        const response = await fetch("http://localhost:8080/demo", {
+          method: "POST",
+          body: JSON.stringify(data),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+        const confirm = await response.json();
+        console.log(confirm);
+        data.push(bookingData);
+      } catch (error) {
+        alert("Server not responding!");
+      }
     }
 
-    const loggedIn = { name: loginData.name, emp_id: loginData.emp_id };
+    const bookingData = { email: token.email, emp_id: token.user };
 
     if (arrival) {
       element.addEventListener("click", function (e) {
@@ -54,24 +59,21 @@ const Bookdesk = () => {
           if (
             data.find(function (entry) {
               console.log(entry.emp_id);
-              return entry.emp_id === loggedIn.emp_id;
+              return entry.emp_id === bookingData.emp_id;
             })
           ) {
-            alert(
-              "Sorry you can only book one seat on single day! You can delete today's entry and select another chair!"
-            );
+            alert("You can only book one seat on single day!");
           } else {
-            e.target.style.fill = "green";
-            loggedIn["chair_id"] = e.target.dataset.id;
-            loggedIn["date_created"] = new Date();
-            loggedIn["for_date"] = new Date(loggedIn["date_created"]);
-            loggedIn["for_date"].setDate(
-              loggedIn["date_created"].getDate() + 1
+            bookingData["chair_id"] = e.target.dataset.id;
+            bookingData["date_created"] = new Date();
+            bookingData["for_date"] = new Date(
+              bookingData["date_created"].getFullYear(),
+              bookingData["date_created"].getMonth(),
+              bookingData["date_created"].getDate() + 1
             );
-            loggedIn["for_date"].setHours(0, 0, 0, 0);
-            data.push(loggedIn);
+            // console.log(bookingData);
 
-            putData(loggedIn);
+            putData(bookingData);
           }
         }
       });
