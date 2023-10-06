@@ -115,6 +115,10 @@ section {
   fill: red;
 }
 
+.chair:hover {
+  cursor: pointer;
+}
+
 .rectangle {
   stroke: blue;
   fill: rgb(96, 96, 193);

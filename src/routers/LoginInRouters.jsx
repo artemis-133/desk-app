@@ -5,11 +5,11 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import Signup from "../pages/Signup";
 import Signin from "../pages/Signin";
 
-const LoginInRouters = ({ saveToken }) => {
+const LoginInRouters = ({ setToken }) => {
   return (
     <Routes>
-      <Route exact path="/signup" element={<Signup setToken={saveToken} />} />
-      <Route exact path="/signin" element={<Signin setToken={saveToken} />} />
+      <Route exact path="/signup" element={<Signup setToken={setToken} />} />
+      <Route exact path="/signin" element={<Signin setToken={setToken} />} />
       <Route
         exact
         path="/*"

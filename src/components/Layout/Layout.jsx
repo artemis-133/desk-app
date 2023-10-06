@@ -1,22 +1,20 @@
-import React, { Fragment, useEffect } from "react";
+import React, { Fragment } from "react";
 import Header from "../Header/Header";
 import Routers from "../../routers/Routers";
 import LoginInRouters from "../../routers/LoginInRouters";
 // import App from '../../App'
-const Layout = ({ token, saveToken }) => {
-  useEffect(() => {
-    console.log(token);
-  }, []);
+const Layout = ({ token, setToken }) => {
+  console.log(token);
   return (
     <Fragment>
-      <Header token={token} setToken={saveToken} />
+      <Header token={token} setToken={setToken} />
       {token && token["user"] ? (
         <div>
-          <Routers />
+          <Routers token={token} setToken={setToken} />
         </div>
       ) : (
         <div>
-          <LoginInRouters saveToken={saveToken} />
+          <LoginInRouters setToken={setToken} />
         </div>
       )}
     </Fragment>
