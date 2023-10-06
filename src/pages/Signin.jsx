@@ -21,24 +21,32 @@ const Signin = ({ setToken }) => {
 
   const handleSubmit = async function (e) {
     e.preventDefault();
-    console.log(form);
-    const res = await fetch("http://localhost:8080/login", {
-      method: "POST",
-      body: JSON.stringify(form),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-    const answer = await res.json();
-    console.log(answer);
-    e.target.reset();
-    if (answer["return"].localeCompare("OK") === 0) {
-      localStorage.setItem("token", JSON.stringify(answer));
-      setToken(answer);
-      navigate("/");
-    } else {
-      setMessage(answer["return"]);
+    try {
+      console.log(form);
+      const res = await fetch("http://localhost:8080/login", {
+        method: "POST",
+        body: JSON.stringify(form),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      const answer = await res.json();
+      console.log(answer);
+      e.target.reset();
+      if (answer["return"].localeCompare("OK") === 0) {
+        localStorage.setItem("token", JSON.stringify(answer));
+        setToken(answer);
+        navigate("/");
+      } else {
+        setMessage(answer["return"]);
+      }
+    } catch (error) {
+      alert("Server not respinding!");
     }
+    // idRef.current.value = "";
+    // passRef.current.value = "";
+    e.target.reset();
+    setForm({});
   };
 
   return (
